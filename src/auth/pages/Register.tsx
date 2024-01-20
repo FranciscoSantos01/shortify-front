@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useAuthStore } from "../../hooks"
 import { useForm } from "../../hooks/useForm"
 
@@ -10,11 +11,14 @@ const initialState  ={
 export const Register = () => {
 
      const{username,email,password,password2,onInputChange}=useForm(initialState)
+     const[disabled, setDisabled] =useState(false)
      const{startRegister}=useAuthStore()
      const handleForm = async(e:React.FormEvent)=>{
         e.preventDefault()
+        setDisabled(!disabled)
         if(password !== password2) return alert('Password must match') 
         await startRegister({username,email,password})
+        setDisabled(false)
      }
   return (
     <section className="w-full h-[85vh] p-4 flex justify-center items-center bg-white ">
@@ -71,7 +75,7 @@ export const Register = () => {
                     />
                 </div>
             </div>
-            <button type="submit" className="w-full rounded mt-3 bg-indigo-500 text-indigo-50 p-2 text-center font-bold hover:bg-indigo-400">Create User</button>
+            <button type="submit" disabled={disabled} className="w-full rounded mt-3 bg-indigo-500 text-indigo-50 p-2 text-center font-bold hover:bg-indigo-400">Create User</button>
         </form>
     </section>
   )

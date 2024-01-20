@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background-color: 
+    #ffffffe6;
+    font-family: 'Poppins', sans-serif;
+}
+
+.background{
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1015%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(81%2c 46%2c 95%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c601.876C110.979%2c596.465%2c166.486%2c464.532%2c258.732%2c402.594C348.397%2c342.389%2c468.673%2c330.018%2c533.517%2c243.649C604.482%2c149.127%2c642.826%2c26.953%2c628.874%2c-90.418C614.789%2c-208.904%2c538.083%2c-308.432%2c457.436%2c-396.371C378.51%2c-482.434%2c289.3%2c-583.043%2c172.628%2c-587.916C57.013%2c-592.745%2c-16.667%2c-465.075%2c-123.51%2c-420.636C-214%2c-382.999%2c-322.389%2c-405.249%2c-402.451%2c-348.725C-493.431%2c-284.493%2c-592.426%2c-197.171%2c-597.607%2c-85.923C-602.807%2c25.745%2c-487.107%2c100.611%2c-427.788%2c195.364C-377.491%2c275.706%2c-344.182%2c363.347%2c-275.471%2c428.641C-195.214%2c504.906%2c-110.583%2c607.268%2c0%2c601.876' fill='%2341254c'%3e%3c/path%3e%3cpath d='M1440 1015.318C1521.655 994.746 1586.174 942.515 1660.976 903.845 1745.284 860.26 1863.538 857.6030000000001 1907.6399999999999 773.564 1951.593 689.81 1880.27 591.9639999999999 1874.18 497.574 1867.388 392.304 1926.766 276.355 1869.833 187.548 1812.622 98.30799999999999 1691.979 77.67200000000003 1588.963 52.678999999999974 1489.859 28.63499999999999 1386.517 15.960000000000036 1289.282 46.70100000000002 1193.127 77.101 1107.3220000000001 139.24900000000002 1050.854 222.803 997.606 301.592 996.8589999999999 400.26599999999996 986.4490000000001 494.789 976.384 586.177 967.0419999999999 676.26 991.142 764.986 1018.504 865.721 1042.48 985.8530000000001 1133.645 1036.6970000000001 1224.896 1087.588 1338.683 1040.843 1440 1015.318' fill='%23613772'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1015'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #FFF;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loader::after,
+  .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #FF3D00;
+    width: 6px;
+    height: 6px;
+    transform: translate(150%, 150%);
+    border-radius: 50%;
+  }
+  .loader::before {
+    left: auto;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    transform: translate(-150%, -150%);
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 

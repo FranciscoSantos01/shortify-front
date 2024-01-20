@@ -5,13 +5,13 @@ import { Link } from "react-router-dom"
 import { MainStore } from "../store/MainStore"
 import { useMainStore } from "../hooks"
 
-
+const URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'
 export const CardUrl = (props: { url: UrlType }) => {
     const{url} = props
      const setActiveUrl = MainStore(state=>state.onSetActiveUrl)
      const{startDeletingUrl} = useMainStore()
    const handleCopyClipboard = ()=>{
-       navigator.clipboard.writeText(`localhost:4000/short/${url.shortUrl}`)
+       navigator.clipboard.writeText(`${URL}/${url.shortUrl}`)
    }
    
 

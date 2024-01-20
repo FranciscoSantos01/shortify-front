@@ -11,7 +11,7 @@ export const CardUrl = (props: { url: UrlType }) => {
      const setActiveUrl = MainStore(state=>state.onSetActiveUrl)
      const{startDeletingUrl} = useMainStore()
    const handleCopyClipboard = ()=>{
-       navigator.clipboard.writeText(`${URL}/${url.shortUrl}`)
+       navigator.clipboard.writeText(`${URL}/short/${url.shortUrl}`)
    }
    
 
@@ -27,7 +27,7 @@ export const CardUrl = (props: { url: UrlType }) => {
        </div>
     </div>
     <div className="flex items-center justify-center w-full">
-        <p>{`localhost:4000/short/${url.shortUrl}`}</p>
+        <p>{`${URL}/short/${url.shortUrl}`}</p>
     </div>
     <div className="flex items-center justify-between w-full">
      <p className="text-md font-medium text-gray-400">Total clicks</p>

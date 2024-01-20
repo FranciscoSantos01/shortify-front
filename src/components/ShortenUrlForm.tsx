@@ -29,8 +29,11 @@ export const ShortenUrlForm = () => {
                 body: JSON.stringify({fullUrl:formState.fullUrl})
             })
             const data = await response.json();
-            setLoading(false)
-            setUrl(data.newUrl)
+            if(data.ok){
+                setLoading(false)
+                setUrl(data.newUrl)
+                setFormState(initalState)
+            }
         } catch (error) {
             console.log(error)
         }

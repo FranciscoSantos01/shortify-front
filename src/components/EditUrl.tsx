@@ -53,7 +53,7 @@ export const EditUrl = () => {
                     clipRule="evenodd"
                     />
                 </svg>
-                <select name="disabled" value={disabled} onChange={onSelectChange} className="w-full px-3 py-2 text-sm text-gray-600 bg-white border rounded-lg shadow-sm outline-none appearance-none focus:ring-offset-2 focus:ring-indigo-600 focus:ring-2">
+                <select name="disabled" value={disabled ? 'true' : 'false'} onChange={onSelectChange} className="w-full px-3 py-2 text-sm text-gray-600 bg-white border rounded-lg shadow-sm outline-none appearance-none focus:ring-offset-2 focus:ring-indigo-600 focus:ring-2">
                     <option>true</option>
                     <option>false</option>
                 </select>

@@ -65,12 +65,15 @@ export const useMainStore = () => {
            console.log('Id seems to be undefined')
            return;
          }
-            await fetch(`${URL}/short/${id}`,{
+            console.log(id)
+           const response = await fetch(`${URL}/short/${id}`,{
                 method:'DELETE',
                 headers:{
                  'x-token':localStorage.getItem('token') ?? ''
               },
             })
+            const data  = await response.json()
+            console.log(data)
            onDeleteUrl(id)
         
      } catch (error) {

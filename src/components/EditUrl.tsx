@@ -9,7 +9,7 @@ import { useMainStore } from "../hooks"
 export const EditUrl = () => {
     const activeUrl = MainStore(state=>state.activeUrl)
     const navigate = useNavigate() 
-    const{formState,urlName,disabled,onInputChange,onSelectChange} = useForm({...activeUrl})
+    const{formState,urlName,disabled,onInputChange,onSelectChange} = useForm(activeUrl)
     const{startEditUrl} = useMainStore()
     
     const handleSubmit = async(e:React.FormEvent)=>{

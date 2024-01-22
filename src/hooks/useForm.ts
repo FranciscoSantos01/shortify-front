@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { UrlType } from '../helpers/types';
 
-export const useForm = <T extends { [key: string]: string | boolean | undefined | number }>(initialForm: T) => {
+
+export const useForm = <T extends { [key: string]: string | boolean | undefined | number | null | UrlType }>(initialForm: T) => {
   const [formState, setFormState] = useState(initialForm);
 
   useEffect(() => {

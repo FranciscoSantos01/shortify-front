@@ -18,7 +18,9 @@ export const ShortenUrlForm = () => {
             [name]:value
         });
     }
-
+    const handleCopyClipboard = ()=>{
+        navigator.clipboard.writeText(`${URL}/short/${url.shortUrl}`)
+    }
     const getShortURl = async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         setLoading(!loading)
@@ -50,8 +52,13 @@ export const ShortenUrlForm = () => {
                 <div>
                     {loading && <Loader />}
                     {url.fullUrl && (
-                        <div className="p-2">
-                        <p className="text-blue-400 font-medium">{`${URL}/short/${url.shortUrl}`}</p>
+                        <div className="p-2 flex items-center gap-4">
+                            <div>
+                               <p className="text-blue-400 font-medium">{`${URL}/short/${url.shortUrl}`}</p>
+                            </div>
+                            <button onClick={handleCopyClipboard} className="px-4 py-2 text-white bg-indigo-600 rounded-full duration-150 hover:bg-indigo-500 active:bg-indigo-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            </button>
                         </div>
                     )}
                 </div>     

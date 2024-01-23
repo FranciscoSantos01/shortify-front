@@ -1,36 +1,44 @@
 import { useEffect, useState } from 'react';
 import { UrlType } from '../helpers/types';
-
-
-export const useForm = <T extends { [key: string]: string | boolean | undefined | number | null | UrlType }>(initialForm: T) => {
-  const [formState, setFormState] = useState(initialForm);
+type NullableItem<T> = T | null
+type FormData = NullableItem<UrlType>
+export const useForm = <T extends FormData>(initialForm: T) => {
+  const [formState, setFormState] = useState(initialForm || null);
 
   useEffect(() => {
-    setFormState(initialForm);
+    if (initialForm !== null) {
+      setFormState(initialForm);
+    }
   }, [initialForm]);
 
   const onInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    if (initialForm === null) return; // Add a check for null here
+
     const { name, value } = target;
     setFormState((prevFormState) => ({
-      ...prevFormState,
+      ...(prevFormState as T),
       [name]: value,
     }));
   };
 
   const onSelectChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+    if (initialForm === null) return; // Add a check for null here
+
     const { name, value } = target;
     setFormState((prevFormState) => ({
-      ...prevFormState,
+      ...(prevFormState as T),
       [name]: value,
     }));
   };
 
   const onResetForm = () => {
+    if (initialForm === null) return; // Add a check for null here
+
     setFormState(initialForm);
   };
 
   return {
-    ...formState,
+    ...formState as T,
     formState,
     onInputChange,
     onResetForm,

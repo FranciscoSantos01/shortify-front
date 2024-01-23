@@ -14,6 +14,10 @@ export const EditUrl = () => {
     
     const handleSubmit = async(e:React.FormEvent)=>{
         e.preventDefault();
+        if (formState === null || typeof formState !== 'object') {
+            // Handle the case where formState is null or not an object
+            return;
+          }
         const convert = disabled === 'true' ? true : false
         const newForm={
             ...formState,

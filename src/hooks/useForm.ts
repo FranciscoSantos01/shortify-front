@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { UrlType } from '../helpers/types';
-type NullableItem<T> = T | null
+type NullableItem<T> = T | string| boolean| number | undefined |null
 type FormData = NullableItem<UrlType>
-export const useForm = <T extends FormData>(initialForm: T) => {
-  const [formState, setFormState] = useState(initialForm || null);
+export const useForm =<T extends object>(initialForm: NullableItem<T>) => {
+  const [formState, setFormState] = useState(initialForm);
 
   useEffect(() => {
     if (initialForm !== null) {
@@ -12,8 +12,7 @@ export const useForm = <T extends FormData>(initialForm: T) => {
   }, [initialForm]);
 
   const onInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    if (initialForm === null) return; // Add a check for null here
-
+    if (initialForm === null || typeof formState !== 'object') return;
     const { name, value } = target;
     setFormState((prevFormState) => ({
       ...(prevFormState as T),
@@ -22,10 +21,10 @@ export const useForm = <T extends FormData>(initialForm: T) => {
   };
 
   const onSelectChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
-    if (initialForm === null) return; // Add a check for null here
+    if (initialForm === null || typeof formState !== 'object') return;
 
     const { name, value } = target;
-    setFormState((prevFormState) => ({
+    setFormState((prevFormState:FormData|null) => ({
       ...(prevFormState as T),
       [name]: value,
     }));

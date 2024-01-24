@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { UrlType } from '../helpers/types';
 type NullableItem<T> = T | string| boolean| number | undefined |null
-type FormData = NullableItem<UrlType>
+
 export const useForm =<T extends object>(initialForm: NullableItem<T>) => {
   const [formState, setFormState] = useState(initialForm);
 
@@ -24,9 +23,10 @@ export const useForm =<T extends object>(initialForm: NullableItem<T>) => {
     if (initialForm === null || typeof formState !== 'object') return;
 
     const { name, value } = target;
-    setFormState((prevFormState:FormData|null) => ({
+    const booleanValue = value === 'true';
+    setFormState((prevFormState) => ({
       ...(prevFormState as T),
-      [name]: value,
+      [name]: name === 'disabled' ? booleanValue : value
     }));
   };
 

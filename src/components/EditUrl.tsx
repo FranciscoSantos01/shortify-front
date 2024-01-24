@@ -15,15 +15,11 @@ export const EditUrl = () => {
     const handleSubmit = async(e:React.FormEvent)=>{
         e.preventDefault();
         if (formState === null || typeof formState !== 'object') {
-            // Handle the case where formState is null or not an object
+           
             return;
           }
-        const convert = disabled === 'true' ? true : false
-        const newForm={
-            ...formState,
-            disabled:convert
-        }
-        await startEditUrl(newForm)
+        
+        await startEditUrl(formState)
         navigate('/home')
     }
 
@@ -58,8 +54,8 @@ export const EditUrl = () => {
                     />
                 </svg>
                 <select name="disabled" value={disabled ? 'true' : 'false'} onChange={onSelectChange} className="w-full px-3 py-2 text-sm text-gray-600 bg-white border rounded-lg shadow-sm outline-none appearance-none focus:ring-offset-2 focus:ring-indigo-600 focus:ring-2">
-                    <option>true</option>
-                    <option>false</option>
+                    <option value="true">true</option>
+                    <option value="false">false</option>
                 </select>
             </div>
             <button type="submit" className="w-full rounded mt-3 bg-indigo-500 text-indigo-50 p-2 text-center font-bold hover:bg-indigo-400">Update</button>

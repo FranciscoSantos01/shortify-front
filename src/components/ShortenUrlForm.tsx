@@ -6,10 +6,12 @@ const initalState ={
     fullUrl :''
 }
 const URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'
+
 export const ShortenUrlForm = () => {
     const[url,setUrl] = useState<UrlType>({})
     const[loading,setLoading] = useState(false)
     const[formState, setFormState] = useState(initalState)
+    const[error,setError]=useState(false)
     
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
         const {name,value} = e.target
@@ -23,6 +25,11 @@ export const ShortenUrlForm = () => {
     }
     const getShortURl = async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
+        const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+        if(formState.fullUrl === '' || !urlRegex.test(formState.fullUrl)){
+            setError(!error)
+            return;
+        }
         setLoading(!loading)
         try {
             const response = await fetch(`${URL}/short`,{
@@ -46,7 +53,12 @@ export const ShortenUrlForm = () => {
             <div className="w-[80%] background rounded-lg shadow-md p-6 flex flex-col items-center gap-2">
                 <h2 className="text-2xl font-bold text-white mb-4 text-center">Create you short url</h2>
                 <form onSubmit={getShortURl} className="flex items-center justify-center gap-4 w-[80%] ">
-                <input name="fullUrl" value={formState.fullUrl} onChange={handleChange} placeholder="Enter your url" className="w-full bg-gray-100 text-gray-800 border-0 rounded-md p-2  focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="text"/>
+                    {error && <p className="text-lg font-medium text-red-500">You must provide a valid url</p> }
+                <input name="fullUrl"
+                value={formState.fullUrl}
+                onChange={handleChange}
+                placeholder="Enter your url"
+                className={error ? "w-full bg-gray-100 text-gray-800 border-2 border-red-500 rounded-md p-2  focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-red-500 transition ease-in-out duration-150" : "w-full bg-gray-100 text-gray-800 border-0 rounded-md p-2  focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" } type="text"/>
                 <button type='submit' className="bg-gradient-to-r from-indigo-500 w-[18rem] to-blue-500 text-white font-bold py-2 px-4 rounded-md  hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150">Shorten it!</button>
                 </form>
                 <div>

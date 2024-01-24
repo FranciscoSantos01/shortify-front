@@ -36,7 +36,7 @@ export const useAuthStore = ()=>{
             })
             const data = await response.json()
             localStorage.setItem('token', data.token)
-            onlogIn({username:data.username,uid:data.uid})
+            onlogIn({username:data.userName,uid:data.uuid})
             console.log(data) 
         } catch (error) {
             console.log(error)
